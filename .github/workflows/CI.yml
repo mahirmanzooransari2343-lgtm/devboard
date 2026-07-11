@@ -27,10 +27,13 @@ jobs:
 
             - name: install nom package
               run: npm install
+              working-directory: ./fronted
 
             - name: Run the Linter
               run: npm run lint
+              working-directory: ./fronted
 
             - name: Run the test
               run: npm run test
+              working-directory: ./fronted
     
