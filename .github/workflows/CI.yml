@@ -47,4 +47,4 @@ jobs:
               with:
                 context: ./frontend
                 push: true
-                tags: ${{ vars.DOCKERHUB_USERNAME }}
+                tags: ${{ vars.DOCKERHUB_USERNAME }}/devboard-fe-one:latest
