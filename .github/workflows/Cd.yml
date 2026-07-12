@@ -1,0 +1,30 @@
+# Goal -->  i have to deploy the the code 
+
+name: CD deploy
+
+on: 
+    workflow_call: 
+
+
+jobs:
+    deploy:
+        runs-on: self-hosted
+
+        steps:
+            - name: code checkout 
+              run: actions/checkout@v7
+
+            - name: copy the env
+              run: cp .env.example .env
+
+            - name:  Docker set up [login]
+              uses:   docker/login-action@v4
+              with:
+                username: ${{ vars.DOCKERHUB_USERNAME }}
+                password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+
+            - name: Dopcker deploy
+              run: |
+                docker compose pull
+                docker compose up -d 
