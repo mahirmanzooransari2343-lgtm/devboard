@@ -1,0 +1,30 @@
+# Goal ---> To RUn the END tO END devsecops pipline 
+
+name: devsecops
+
+on: 
+    push: 
+
+
+jobs:
+    code:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: code quality
+              uses: ./.github/workflows/code-quality.yml
+
+            - name: secrets of code
+              uses: ./.github/workflows/secrets.yml
+
+            - name:  dependency check the vernability
+              uses:  ./.github/workflows/dependency.yml
+        
+    
+    #biild:
+
+
+    #test:
+
+
+    #deploy:
