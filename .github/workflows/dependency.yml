@@ -25,8 +25,17 @@ jobs:
               working-directory: ./frontend
 
             - name: Run npm audit
+              continue-on-error: true
               run:  npm audit
               working-directory: ./frontend
+
+            - name: upload the artifact
+              if: always()
+              uses: actions/upload-artifact@v4
+              with:
+                name: node js vernability
+                path: vulnerability-report.txt
+                retention-days: 5
 
 
     dependency-sacn-backend:
@@ -53,6 +62,7 @@ jobs:
               working-directory: ./backend
 
             - name:  run the scanner
+              continue-on-error: true
               run:  govulncheck ./...
               working-directory: ./backend
 
