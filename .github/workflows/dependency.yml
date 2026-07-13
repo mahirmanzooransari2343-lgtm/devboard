@@ -21,7 +21,7 @@ jobs:
                 cache-dependency-path: frontend/package-lock.json
 
             - name: install package 
-              run:  install npm
+              run:  npm install
               working-directory: ./frontend
 
             - name: Run npm audit
@@ -42,15 +42,15 @@ jobs:
           - name:  set up the Gcontinue-on-error
             uses:  actions/setup-go@v6
             with:
-              go-version: '1.23'
+              go-version: '1.22'
               go-version-file: 'go.mod'
               cache-dependency-path: 'go.sum'
               cache: true
 
           - name: install dependency scaner
-            run: install golang.org/x/vuln/cmd/govulncheck@latest
+            run: go install golang.org/x/vuln/cmd/govulncheck@latest
             working-directory: ./backend
 
           - name:  run the scanner
-            run:  ovulncheck ./...
+            run:  govulncheck ./...
             working-directory: ./backend
