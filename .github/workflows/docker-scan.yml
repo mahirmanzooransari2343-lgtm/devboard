@@ -1,1 +1,24 @@
-# Goal I have to check the image and After the scan the docker images
+# Goal I have to  ensure the docker file and image is secure
+
+name: docker scan
+
+on: 
+    workflow_call: 
+
+
+jobs:
+    docker-file-lint:
+        runs-on: ubuntu-latest
+        strategy:
+          matrix:
+            folder: ["backend","frontend"]
+        
+        steps:
+            - name: code  checkout
+              uses:  actions/checkout@v7
+
+            - name: Docker file lint
+              uses: hadolint/hadolint-action@v3.1.0
+              with:
+                dockerfile: ${{ matrix.folder }}/Dockerfile
+                

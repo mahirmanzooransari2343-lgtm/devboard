@@ -26,6 +26,10 @@ jobs:
            
     #biild:
 
+    Docker-scan:
+        uses: ./.github/workflows/docker-scan.yml
+        secrets: inherit
+
 
     #test:
 
