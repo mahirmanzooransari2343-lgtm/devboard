@@ -1,1 +1,56 @@
 # Goal i Have to check and scan the the dependency for my code
+
+name: dependency scan
+
+on:
+    workflow_call: 
+
+
+jobs:
+    dependency-Scan-frontend:
+        runs-on: ubuntu-latest
+        steps:
+            - name: code chechout 
+              uses: actions/checout@v7
+              
+            - name: setup node js
+              uses: actions/setup-node@v6
+              with:
+                node-version: "20"
+                cache: npm
+                cache-dependency-path: frontend/package-lock.json
+
+            - name: install package 
+              run:  install npm
+              working-directory: ./frontend
+
+            - name: Run npm audit
+              run:  npm audit
+              working-directory: ./frontend
+
+
+    dependency-sacn-backend:
+
+        runs-on: ubuntu-latest
+
+        steps:
+
+
+          - name: code checkout 
+            uses: actions/checkout@v7
+
+          - name:  set up the Gcontinue-on-error
+            uses:  actions/setup-go@v6
+            with:
+              go-version: '1.23'
+              go-version-file: 'go.mod'
+              cache-dependency-path: 'go.sum'
+              cache: true
+
+          - name: install dependency scaner
+            run: install golang.org/x/vuln/cmd/govulncheck@latest
+            working-directory: ./backend
+
+          - name:  run the scanner
+            run:  ovulncheck ./...
+            working-directory: ./backend
