@@ -3,7 +3,8 @@
 name: devsecops
 
 on: 
-    push: 
+    push:
+        branches: [master] 
 
 
 jobs:
@@ -13,8 +14,8 @@ jobs:
         secrets: inherit
 
    # dependency-scan:
-        uses: ./github/workflows/dependency.ynl
-        secrets: inherit
+       # uses: ./github/workflows/dependency.ynl
+        #secrets: inherit
 
 
 
