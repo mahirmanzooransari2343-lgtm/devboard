@@ -48,7 +48,7 @@ jobs:
               cache: true
 
           - name: install dependency scaner
-            run: go install golang.org/x/vuln/cmd/govulncheck@latest
+            run: go install golang.org/x/vuln/cmd/govulncheck@v1.1.4
             working-directory: ./backend
 
           - name:  run the scanner
