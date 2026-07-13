@@ -36,21 +36,31 @@ jobs:
         steps:
 
 
-          - name: code checkout 
-            uses: actions/checkout@v7
 
-          - name:  set up the Gcontinue-on-error
-            uses:  actions/setup-go@v6
-            with:
-              go-version: '1.22'
-              go-version-file: 'go.mod'
-              cache-dependency-path: 'go.sum'
-              cache: true
+            - name: code checkout 
+              uses: actions/checkout@v7
 
-          - name: install dependency scaner
-            run: go install golang.org/x/vuln/cmd/govulncheck@v1.1.4
-            working-directory: ./backend
+            - name:  set up the Gcontinue-on-error
+              uses:  actions/setup-go@v6
+              with:
+                go-version: '1.22'
+                go-version-file: 'go.mod'
+                cache-dependency-path: 'go.sum'
+                cache: true
 
-          - name:  run the scanner
-            run:  govulncheck ./...
-            working-directory: ./backend
+            - name: install dependency scaner
+              run: go install golang.org/x/vuln/cmd/govulncheck@v1.1.4
+              working-directory: ./backend
+
+            - name:  run the scanner
+              run:  govulncheck ./...
+              working-directory: ./backend
+
+            - name: upload the artifact
+              if: always()
+              uses: actions/upload-artifact@v4
+              with:
+                name: golang-vulnerability-report
+                path: vulnerability-report.txt
+                retention-days: 5
+ 
