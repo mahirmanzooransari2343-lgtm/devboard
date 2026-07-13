@@ -17,6 +17,10 @@ jobs:
        # uses: ./github/workflows/dependency.ynl
         #secrets: inherit
 
+    secrets-scan:
+        uses: ./.github/workflows/secrets.yml
+        secrets: inherit
+
 
 
            
