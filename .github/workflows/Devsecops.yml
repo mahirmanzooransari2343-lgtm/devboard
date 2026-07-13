@@ -7,20 +7,18 @@ on:
 
 
 jobs:
-    code:
-        runs-on: ubuntu-latest
+    # code-> security
+    code-quality:
+        uses: ./.github/workflows/code-quality.yml
+        secrets: inherit
 
-        steps:
-            - name: code quality
-              uses: ./.github/workflows/code-quality.yml
+   # dependency-scan:
+        uses: ./github/workflows/dependency.ynl
+        secrets: inherit
 
-            - name: secrets of code
-              uses: ./.github/workflows/secrets.yml
 
-            - name:  dependency check the vernability
-              uses:  ./.github/workflows/dependency.yml
-        
-    
+
+           
     #biild:
 
 
