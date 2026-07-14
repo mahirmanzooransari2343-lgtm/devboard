@@ -9,26 +9,38 @@ on:
 
 jobs:
     # code-> security
+
+    # code quality
     code-quality:
         uses: ./.github/workflows/code-quality.yml
         secrets: inherit
 
-        
+        # secret-check
     secrets-scan:
         uses: ./.github/workflows/secrets.yml
         secrets: inherit
-            
+            # dependdency check
     dependency-scan:
         uses: ./.github/workflows/dependency.yml
         secrets: inherit
-
-
-           
-    #biild:
-
+        
+        # dockerchcek
     Docker-scan:
         uses: ./.github/workflows/docker-scan.yml
         secrets: inherit
+        
+        #Sonnar qube
+
+    sonar-scan:
+        uses: ./.github/workflows/sonar-scan.yml
+            
+
+    
+            
+
+  #  docker-build-push:
+   #     uses: ./.github/workflows/docker-build-push.yml
+    #    secrets: inherit
 
 
     #test:
