@@ -26,5 +26,6 @@ jobs:
             - name: DOCKER BUILD-push
               uses: docker/build-push-action@v7
               with:
-                context: ./${{ matrix.folder }}
-                tags: ${{ vars.DOCKERHUB_USERNAME }}/devboard-${{ matrix.folder}}:latest
+                push: true
+                context:  ./${{ matrix.folder }}
+                tags:  ${{ vars.DOCKERHUB_USERNAME }}/devboard-${{ matrix.folder }}:latest
