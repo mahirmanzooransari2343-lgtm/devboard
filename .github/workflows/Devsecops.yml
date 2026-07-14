@@ -39,6 +39,20 @@ jobs:
     code-test:
         uses: ./.github/workflows/code-test.yml
         secrets: inherit
+        
+        
+    dockerhub-push:
+        needs: [ code-quality,secrets-scan,dependency-scan, Docker-scan,sonar-scan,code-test]
+        uses: ./.github/workflows/docker-hub-build-push.yml
+        secrets: inherit
+
+        # Deploy the code
+
+    deploy:
+        needs: [ code-quality,secrets-scan,dependency-scan, Docker-scan,sonar-scan,code-test,dockerhub-push ]
+        uses: ./.github/workflows/Cd.yml
+        secrets: inherit
+        
             
 
     

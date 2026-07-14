@@ -1,0 +1,29 @@
+# Goal ---> i have to build the my file and sent to dockerhub to push
+name: docker build and push
+
+on: 
+    workflow_call: 
+
+
+jobs:
+    docker-build-push:
+        runs-on: ubuntu-latest
+        strategy:
+            matrix:
+                folder: ['backend','frontend']
+        
+        steps:
+            - name: code checkout
+              uses:  actions/checkout@v7
+
+            - name: Doocker set up [login]
+              uses:  docker/login-action@v4
+              with:
+                  username: ${{ vars.DOCKERHUB_USERNAME }}
+                  password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+            - name: DOCKER BUILD-push
+              uses:  docker/build-push-action@v7
+              with:
+                context: ./${{ matrix.folder }}
+                tags: ${{ vars.DOCKERHUB_USERNAME }}/devboard-${{ matrix.folder}}:latest
