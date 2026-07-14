@@ -33,6 +33,7 @@ jobs:
 
     sonar-scan:
         uses: ./.github/workflows/sonar-scan.yml
+        secrets: inherit
             
 
     
