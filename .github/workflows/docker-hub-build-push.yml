@@ -9,6 +9,7 @@ jobs:
     docker-build-push:
         runs-on: ubuntu-latest
         strategy:
+            fail-fast: false
             matrix:
                 folder: ['backend','frontend']
         
@@ -23,7 +24,7 @@ jobs:
                   password: ${{ secrets.DOCKERHUB_TOKEN }}
 
             - name: DOCKER BUILD-push
-              uses:  docker/build-push-action@v7
+              uses: docker/build-push-action@v7
               with:
                 context: ./${{ matrix.folder }}
                 tags: ${{ vars.DOCKERHUB_USERNAME }}/devboard-${{ matrix.folder}}:latest
